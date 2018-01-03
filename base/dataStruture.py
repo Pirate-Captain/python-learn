@@ -18,6 +18,5 @@ print(chr(125))
 print(len('中国'))
 print(len('中国'.encode('utf-8')))
 
-
 # 占位符，在Python中，采用的格式化方式和C语言是一致的，用%实现
 print('Hello %s' % 'world')

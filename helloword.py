@@ -10,7 +10,7 @@ numberStr = input("Enter the number comes up in your mind firstly:")
 
 count = float(numberStr)
 
-if count > 0 :
+if count > 0:
     print(count)
-else :
+else:
     print(-count)

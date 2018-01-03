@@ -2,14 +2,17 @@
 def emptyFunction():
     pass
 
+
 print(emptyFunction())
 
+
 def multiplacation(x, y):
-    if ( not isinstance(x, (int, float)) ):
+    if (not isinstance(x, (int, float))):
         raise TypeError('bad operator type')
-    if ( not isinstance(y, (int, float))):
+    if (not isinstance(y, (int, float))):
         raise TypeError('bad operator type')
     return x * y
+
 
 # wrong parameter
 # print(multiplacation(10, 'a'))
@@ -18,9 +21,11 @@ print(multiplacation(10, 10.3))
 
 print(multiplacation(10, 10))
 
+
 # 返回多个值的函数 原来返回值是一个tuple
 def multiResult(x, y):
     return x + '1', y + '2'
+
 
 print(multiResult('1', 'd'))
 

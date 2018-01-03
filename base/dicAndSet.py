@@ -1,5 +1,5 @@
 # Python内置了字典：dict的支持，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储
-provinces = {"11":"北京", "12":"天津", "41":"河南"}
+provinces = {"11": "北京", "12": "天津", "41": "河南"}
 print(provinces)
 
 # 修改key对应的值
@@ -18,7 +18,6 @@ print(provinces.get("19", "未知"))
 provinces.pop("12")
 print(provinces)
 
-
 # set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key
 # provinceCode = set([11, 12, 13, 14, 15, 11])
 provinceCode = {11, 12, 13, 14, 15, 11}
@@ -28,7 +27,7 @@ print(provinceCode)
 provinceCode.add(18)
 print(provinceCode)
 
-#通过remove(key)方法可以删除元素
+# 通过remove(key)方法可以删除元素
 provinceCode.remove(13)
 print(provinceCode)
 
