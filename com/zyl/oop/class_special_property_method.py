@@ -37,6 +37,10 @@ __new__ 	该方法会在__init__方法之前被执行，该方法会创建被返
             而是一个静态方法。
 __call__ 	源码中的注释是"Call self as a function." 意思是把自己（实例对象）作为一个函数去调用，而函数的调用方式是函数名()。也就是说，
             当我们执行实例对象()或者 类名()()这样的操作时会触发执行该方法。
+__iter__    如果一个类想被用于for ... in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的
+            for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环
+__getattr__ 正常情况下，当我们调用类的方法或属性时，如果不存在，就会报错: AttributeError: 'xxx' object has no attribute 'cccc'
+            写一个__getattr__()方法，动态返回一个属性
 """
 
 
@@ -106,3 +110,65 @@ del my_dict["num"]
 print(my_dict["num"])
 del my_dict["what"]
 print(my_dict["what"])
+
+"""
+__iter__    如果一个类想被用于for ... in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的
+            for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环
+"""
+
+
+class IterClass(object):
+    def __init__(self):
+        self.a, self.b = 0, 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.a, self.b = self.b, self.a + self.b
+        if self.a > 10000:
+            raise StopIteration()
+        return self.a
+
+
+for n in IterClass():
+    print(n)
+
+"""
+__getattr__ 正常情况下，当我们调用类的方法或属性时，如果不存在，就会报错: AttributeError: 'xxx' object has no attribute 'cccc'
+            写一个__getattr__()方法，动态返回一个属性
+"""
+
+
+class GetAttr(object):
+    def __init__(self):
+        self.name = "Mike"
+
+    def __getattr__(self, item):
+        if item == "age":
+            return 20
+        raise AttributeError("'GetAttr' object has no attribute %s" % item)
+
+
+ga1 = GetAttr()
+print(ga1.name)
+print(ga1.age)
+
+
+# print(ga1.score)
+
+
+class Chain(object):
+    def __init__(self, path):
+        self.path = path
+
+    def __getattr__(self, item):
+        return Chain("%s/%s" % (self.path, item))
+
+    def __str__(self):
+        return self.path
+
+    __repr__ = __str__
+
+
+print(Chain("").status.user.timeline.list)
